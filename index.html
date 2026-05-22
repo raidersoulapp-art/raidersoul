@@ -482,71 +482,94 @@
        CTA
     ========================== */
 
-    .cta {
-      margin-top: 60px;
+    .cta{
+  margin-top:60px;
+  background:
+    linear-gradient(90deg,rgba(120,0,0,.82),rgba(180,0,0,.42)),
+    url("asset/cta-bg.png");
+  background-size:cover;
+  background-position:center;
+  border-radius:24px;
+  overflow:hidden;
+  padding:54px;
+  display:grid;
+  grid-template-columns:1fr 460px;
+  gap:50px;
+  align-items:center;
+}
 
-      background:
-        linear-gradient(
-          90deg,
-          rgba(120, 0, 0, .82),
-          rgba(180, 0, 0, .42)
-        ),
-        url("asset/cta-bg.png");
+.waitlist-form-vertical{
+  background:rgba(4,8,13,.72);
+  border:1px solid rgba(255,255,255,.14);
+  backdrop-filter:blur(14px);
+  border-radius:24px;
+  padding:28px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
 
-      background-size: cover;
-      background-position: center;
+.waitlist-form-vertical input,
+.waitlist-form-vertical select{
+  width:100%;
+  height:54px;
+  border:none;
+  outline:none;
+  border-radius:14px;
+  padding:0 18px;
+  font-size:15px;
+}
 
-      border-radius: 24px;
-      overflow: hidden;
+.checkbox-group{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
 
-      padding: 54px;
+.checkbox-group label,
+.beta-check{
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.14);
+  padding:12px 14px;
+  border-radius:14px;
+  font-size:14px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
 
-      display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: 40px;
-      align-items: center;
-    }
+.checkbox-group input,
+.beta-check input{
+  width:16px;
+  height:16px;
+  flex-shrink:0;
+}
 
-    .cta h2 {
-      font-size: 42px;
-      line-height: 1.2;
-      margin-bottom: 18px;
-    }
+.beta-check{
+  width:100%;
+}
 
-    .cta p {
-      line-height: 1.6;
-      font-size: 17px;
-      max-width: 500px;
-    }
+.waitlist-form-vertical button{
+  height:56px;
+  border:none;
+  border-radius:14px;
+  background:#ff3131;
+  color:white;
+  font-weight:800;
+  font-size:16px;
+  cursor:pointer;
+}
 
-    .cta-note {
-      margin-top: 16px;
-      opacity: .8;
-      font-size: 14px;
-    }
+@media(max-width:900px){
+  .cta{
+    grid-template-columns:1fr;
+    padding:34px 24px;
+  }
 
-    .waitlist-form-vertical {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .waitlist-form-vertical input,
-    .waitlist-form-vertical select {
-      width: 100%;
-      height: 58px;
-      border: none;
-      outline: none;
-      border-radius: 14px;
-      padding: 0 18px;
-      font-size: 15px;
-    }
-
-    .checkbox-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
+  .checkbox-group{
+    grid-template-columns:1fr;
+  }
+}
 
     .checkbox-group label {
       background: rgba(255, 255, 255, .12);
