@@ -497,10 +497,22 @@
         <div class="cta-note">Niente spam. Solo novità importanti.</div>
       </div>
 
-      <form class="waitlist-form">
-        <input type="email" placeholder="La tua email">
-        <button type="submit">Iscrivimi →</button>
-      </form>
+<form class="waitlist-form" 
+  action="https://formspree.io/f/xykvjklz" 
+  method="POST">
+  <input type="email" 
+    name="email" 
+    placeholder="La tua email" 
+    required>
+
+  <input type="hidden" 
+    name="progetto" 
+    value="rAIderSoul Waitlist">
+
+  <button type="submit">
+    Iscrivimi →
+  </button>
+</form>
     </div>
   </div>
 </section>
