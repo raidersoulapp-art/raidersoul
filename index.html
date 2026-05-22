@@ -259,45 +259,67 @@
       color:#cfd5dc;
       line-height:1.5;
     }
+.steps{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:30px;
+  margin-top:54px;
+  text-align:center;
+}
 
-    .steps{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:28px;
-      margin-top:44px;
-      text-align:center;
-      position:relative;
-    }
+.step{
+  position:relative;
+  flex:1;
+  min-width:0;
+}
 
-    .step-number{
-      color:#ef2f2f;
-      font-size:32px;
-      font-weight:900;
-      margin-bottom:14px;
-    }
+.step:not(:last-child)::after{
+  content:"";
+  position:absolute;
+  top:88px;
+  right:-42px;
+  width:84px;
+  border-top:2px dashed rgba(255,255,255,.18);
+}
 
-    .step-icon{
-      width:72px;
-      height:72px;
-      border-radius:50%;
-      border:1px solid rgba(255,255,255,.18);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      margin:0 auto 16px;
-      background:#101720;
-    }
+.step-number{
+  color:#ef2f2f;
+  font-size:34px;
+  font-weight:900;
+  margin-bottom:22px;
+}
 
-    .step-icon svg{
-      width:34px;
-      height:34px;
-      stroke:#fff;
-    }
+.step-icon{
+  width:78px;
+  height:78px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.18);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 22px;
+  background:#111820;
+}
 
-    .step p{
-      font-size:15px;
-      color:#e5e8eb;
-      line-height:1.45;
+.step-icon svg{
+  width:38px;
+  height:38px;
+  stroke:#fff;
+  stroke-width:2.4;
+  fill:none;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.step p{
+  max-width:240px;
+  margin:0 auto;
+  font-size:16px;
+  color:#e5e8eb;
+  line-height:1.45;
+}
+ine-height:1.45;
     }
 
     .pro-title{
@@ -477,6 +499,18 @@
       }
       .form input{background:#fff}
     }
+
+    @media(max-width:900px){
+  .steps{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:38px;
+  }
+
+  .step:not(:last-child)::after{
+    display:none;
+  }
+}
   </style>
 </head>
 
@@ -596,16 +630,20 @@
     </div>
   </div>
 </section>
-
 <section id="how">
   <div class="container">
     <h2 class="section-title">Come funziona</h2>
 
     <div class="steps">
+
       <div class="step">
         <div class="step-number">1</div>
         <div class="step-icon">
-          <svg viewBox="0 0 64 64" fill="none" stroke-width="3"><path d="M14 48l4-14 26-26 10 10-26 26z"/><path d="M38 14l10 10"/></svg>
+          <svg viewBox="0 0 64 64">
+            <path d="M18 46l4-15L43 10l11 11-21 21z"/>
+            <path d="M39 14l11 11"/>
+            <path d="M18 46l15-4"/>
+          </svg>
         </div>
         <p>Scrivi da dove parti, quanto tempo hai e che giro vuoi fare.</p>
       </div>
@@ -613,7 +651,13 @@
       <div class="step">
         <div class="step-number">2</div>
         <div class="step-icon">
-          <svg viewBox="0 0 64 64" fill="none" stroke-width="3"><path d="M18 18c0-6 5-10 10-10s10 4 10 10c0 8-10 18-10 18S18 26 18 18z"/><path d="M40 34c0-5 4-8 8-8s8 3 8 8c0 6-8 15-8 15S40 40 40 34z"/><path d="M28 44c8-5 13-4 20 5"/></svg>
+          <svg viewBox="0 0 64 64">
+            <path d="M22 17c0-6 5-11 11-11s11 5 11 11c0 9-11 22-11 22S22 26 22 17z"/>
+            <circle cx="33" cy="17" r="4"/>
+            <path d="M44 36c0-5 4-9 9-9s9 4 9 9c0 7-9 18-9 18S44 43 44 36z"/>
+            <circle cx="53" cy="36" r="3"/>
+            <path d="M15 52c9-8 20-8 30 0"/>
+          </svg>
         </div>
         <p>rAIderSoul genera un itinerario con tappe e suggerimenti.</p>
       </div>
@@ -621,7 +665,11 @@
       <div class="step">
         <div class="step-number">3</div>
         <div class="step-icon">
-          <svg viewBox="0 0 64 64" fill="none" stroke-width="3"><path d="M12 14l14-6 14 6 12-6v42l-12 6-14-6-14 6z"/><path d="M26 8v42M40 14v42"/></svg>
+          <svg viewBox="0 0 64 64">
+            <path d="M14 15l13-6 12 6 11-6v40l-11 6-12-6-13 6z"/>
+            <path d="M27 9v40"/>
+            <path d="M39 15v40"/>
+          </svg>
         </div>
         <p>Apri il percorso su Google Maps e parti.</p>
       </div>
@@ -629,10 +677,13 @@
       <div class="step">
         <div class="step-number">4</div>
         <div class="step-icon">
-          <svg viewBox="0 0 64 64" fill="none" stroke-width="3"><path d="M20 10h24v44L32 46 20 54z"/></svg>
+          <svg viewBox="0 0 64 64">
+            <path d="M22 10h20v44L32 47l-10 7z"/>
+          </svg>
         </div>
         <p>Salva i tuoi giri preferiti nel profilo.</p>
       </div>
+
     </div>
   </div>
 </section>
