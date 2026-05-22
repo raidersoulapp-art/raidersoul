@@ -2,504 +2,480 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>rAIderSoul</title>
 
   <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
-
-    html{
-      scroll-behavior:smooth;
-    }
-
-    body{
-      background:#05070b;
-      color:white;
-      font-family:Arial, sans-serif;
-      overflow-x:hidden;
-    }
-
-    a{
-      text-decoration:none;
-    }
-
-    .container{
-      width:90%;
-      max-width:1400px;
-      margin:auto;
-    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:Arial,Helvetica,sans-serif;background:#05090d;color:#fff}
+    a{text-decoration:none;color:inherit}
+    .container{width:92%;max-width:1180px;margin:auto}
 
     header{
+      height:78px;
+      background:#05090d;
+      display:flex;
+      align-items:center;
       position:fixed;
       top:0;
+      left:0;
       width:100%;
-      z-index:999;
-      backdrop-filter:blur(14px);
-      background:rgba(5,7,11,0.75);
-      border-bottom:1px solid rgba(255,255,255,0.05);
+      z-index:20;
+      border-bottom:1px solid rgba(255,255,255,.06);
     }
 
-    .navbar{
+    .nav{
       display:flex;
-      justify-content:space-between;
       align-items:center;
-      padding:22px 0;
+      justify-content:space-between;
     }
 
     .logo img{
-      height:42px;
-      width:auto;
+      height:38px;
       display:block;
     }
 
     .nav-links{
       display:flex;
       align-items:center;
-      gap:45px;
-    }
-
-    .nav-links a{
-      color:white;
-      font-size:17px;
-      opacity:0.92;
+      gap:38px;
+      font-size:15px;
+      font-weight:500;
     }
 
     .nav-cta{
-      background:#ff3d35;
-      padding:16px 28px;
-      border-radius:16px;
+      background:#ef2f2f;
+      padding:14px 26px;
+      border-radius:10px;
       font-weight:700;
-      transition:0.3s;
-    }
-
-    .nav-cta:hover{
-      transform:translateY(-2px);
     }
 
     .hero{
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      position:relative;
-      overflow:hidden;
-      padding-top:120px;
-    }
-
-    .hero-bg{
-      position:absolute;
-      inset:0;
+      min-height:650px;
+      padding-top:78px;
       background:
-      linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.72)),
-      url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1920&auto=format&fit=crop');
-      background-size:cover;
-      background-position:center;
-      z-index:-2;
+        linear-gradient(90deg,rgba(5,9,13,.96) 0%,rgba(5,9,13,.72) 40%,rgba(5,9,13,.25) 100%),
+        url("asset/hero-bg.png") center/cover no-repeat;
+      position:relative;
     }
 
-    .hero-overlay{
+    .hero::after{
+      content:"";
       position:absolute;
-      inset:0;
-      background:radial-gradient(circle at center, transparent 0%, #05070b 100%);
-      z-index:-1;
+      left:0;
+      right:0;
+      bottom:0;
+      height:180px;
+      background:linear-gradient(transparent,#05090d);
     }
 
-    .hero-grid{
+    .hero-content{
+      position:relative;
+      z-index:2;
+      min-height:572px;
       display:grid;
-      grid-template-columns:1fr 470px;
-      gap:70px;
+      grid-template-columns:1fr 360px;
       align-items:center;
+      gap:70px;
     }
 
-    .hero-text h1{
-      font-size:88px;
-      line-height:0.95;
+    .hero h1{
+      font-size:62px;
+      line-height:1.04;
       font-weight:900;
-      margin-bottom:30px;
+      letter-spacing:-2px;
+      margin-bottom:24px;
     }
 
-    .hero-text h1 span{
-      color:#ff3d35;
+    .hero h1 span{color:#ef2f2f}
+
+    .hero p{
+      max-width:550px;
+      color:#f2f2f2;
+      font-size:17px;
+      line-height:1.65;
+      margin-bottom:34px;
     }
 
-    .hero-text p{
-      font-size:24px;
-      line-height:1.7;
-      color:#d7d7d7;
-      max-width:720px;
-      margin-bottom:40px;
-    }
-
-    .hero-actions{
+    .hero-buttons{
       display:flex;
-      gap:20px;
-      flex-wrap:wrap;
+      gap:18px;
+      align-items:center;
     }
 
     .btn-primary{
-      background:#ff3d35;
-      color:white;
-      padding:20px 34px;
-      border-radius:18px;
-      font-size:18px;
-      font-weight:700;
-      transition:0.3s;
-    }
-
-    .btn-primary:hover{
-      transform:translateY(-3px);
+      background:#ef2f2f;
+      padding:15px 24px;
+      border-radius:12px;
+      font-weight:800;
     }
 
     .btn-secondary{
-      border:1px solid rgba(255,255,255,0.2);
-      color:white;
-      padding:20px 34px;
-      border-radius:18px;
-      font-size:18px;
-      font-weight:700;
-      backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,.45);
+      padding:15px 24px;
+      border-radius:12px;
+      font-weight:800;
+      background:rgba(0,0,0,.25);
     }
 
     .phone{
-      background:#0d1017;
+      width:360px;
+      min-height:520px;
       border-radius:42px;
-      padding:16px;
-      border:1px solid rgba(255,255,255,0.06);
-      box-shadow:0 30px 80px rgba(0,0,0,0.7);
+      padding:14px;
+      background:#080b10;
+      border:2px solid rgba(255,255,255,.25);
+      box-shadow:0 30px 80px rgba(0,0,0,.8);
     }
 
-    .phone-screen{
-      background:#11141d;
+    .phone-inner{
+      height:100%;
       border-radius:32px;
-      padding:30px;
+      background:#070b10;
+      padding:22px;
+      border:1px solid rgba(255,255,255,.08);
     }
 
-    .phone-top{
+    .phone-status{
       display:flex;
       justify-content:space-between;
-      align-items:center;
-      margin-bottom:30px;
+      font-size:12px;
+      margin-bottom:24px;
+      color:#fff;
     }
 
-    .phone-title{
-      color:#ff3d35;
+    .phone-brand{
+      text-align:center;
+      font-size:18px;
       font-weight:800;
-      font-size:22px;
+      margin-bottom:28px;
     }
 
-    .prompt-box{
-      background:#1b202b;
-      border-radius:22px;
-      padding:24px;
-      line-height:1.8;
-      color:#ddd;
-      margin-bottom:26px;
+    .phone-brand span{color:#ef2f2f}
+
+    .phone-label{
+      font-size:14px;
+      font-weight:700;
+      margin-bottom:10px;
     }
 
-    .route-card{
-      background:#171b24;
-      border-radius:24px;
-      padding:24px;
+    .prompt{
+      background:#1d222b;
+      border-radius:14px;
+      padding:18px;
+      font-size:14px;
+      line-height:1.6;
+      color:#fff;
+      margin-bottom:24px;
     }
 
-    .route-card h3{
-      color:#ff3d35;
+    .route-title{
+      color:#ef2f2f;
+      font-weight:800;
+      margin-bottom:14px;
+    }
+
+    .route-box{
+      background:#101720;
+      border-radius:14px;
+      overflow:hidden;
       margin-bottom:20px;
-      font-size:24px;
     }
 
-    .route-item{
+    .route-row{
       display:flex;
       justify-content:space-between;
-      gap:18px;
-      margin-bottom:16px;
-      color:#ddd;
+      gap:20px;
+      padding:13px 14px;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      font-size:13px;
     }
 
-    .route-item span:last-child{
-      text-align:right;
-    }
+    .route-row:last-child{border-bottom:none}
+    .route-row span:last-child{text-align:right}
 
     .maps-btn{
       display:block;
-      margin-top:24px;
-      background:#ff3d35;
-      color:white;
+      background:#ef2f2f;
       text-align:center;
-      padding:18px;
-      border-radius:18px;
-      font-weight:700;
+      padding:16px;
+      border-radius:12px;
+      font-weight:800;
     }
 
     section{
-      padding:120px 0;
+      padding:58px 0;
+      border-top:1px solid rgba(255,255,255,.06);
     }
 
     .section-title{
       text-align:center;
-      font-size:58px;
-      font-weight:800;
-      margin-bottom:20px;
+      font-size:28px;
+      font-weight:900;
+      margin-bottom:10px;
     }
 
-    .section-sub{
+    .section-subtitle{
       text-align:center;
-      max-width:900px;
-      margin:auto;
-      color:#cfcfcf;
-      font-size:22px;
-      line-height:1.8;
+      color:#d0d5db;
+      max-width:720px;
+      margin:0 auto;
+      line-height:1.55;
+      font-size:16px;
     }
 
     .features{
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:28px;
-      margin-top:70px;
+      gap:22px;
+      margin-top:38px;
     }
 
     .feature-card{
-      background:#11141d;
-      border:1px solid rgba(255,255,255,0.05);
-      border-radius:28px;
-      padding:40px;
-      transition:0.3s;
+      background:#0c1219;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:16px;
+      padding:30px;
+      display:flex;
+      gap:22px;
+      align-items:center;
     }
 
-    .feature-card:hover{
-      transform:translateY(-5px);
-      border-color:rgba(255,61,53,0.3);
-    }
-
-    .feature-icon{
-      font-size:48px;
-      margin-bottom:22px;
+    .icon{
+      width:54px;
+      height:54px;
+      color:#ef2f2f;
+      flex-shrink:0;
     }
 
     .feature-card h3{
-      font-size:30px;
-      margin-bottom:18px;
-      color:#ff3d35;
+      font-size:17px;
+      margin-bottom:8px;
     }
 
     .feature-card p{
-      color:#d0d0d0;
-      line-height:1.8;
-      font-size:18px;
+      font-size:14px;
+      color:#cfd5dc;
+      line-height:1.5;
     }
 
     .steps{
       display:grid;
       grid-template-columns:repeat(4,1fr);
-      gap:24px;
-      margin-top:80px;
-    }
-
-    .step{
-      background:#11141d;
-      border-radius:28px;
-      padding:40px 26px;
+      gap:28px;
+      margin-top:44px;
       text-align:center;
+      position:relative;
     }
 
     .step-number{
-      font-size:62px;
+      color:#ef2f2f;
+      font-size:32px;
       font-weight:900;
-      color:#ff3d35;
-      margin-bottom:20px;
+      margin-bottom:14px;
+    }
+
+    .step-icon{
+      width:72px;
+      height:72px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.18);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin:0 auto 16px;
+      background:#101720;
+    }
+
+    .step-icon svg{
+      width:34px;
+      height:34px;
+      stroke:#fff;
     }
 
     .step p{
-      color:#d5d5d5;
-      line-height:1.8;
-      font-size:18px;
+      font-size:15px;
+      color:#e5e8eb;
+      line-height:1.45;
     }
 
     .pro-title{
       text-align:center;
-      font-size:58px;
-      margin-bottom:70px;
-      font-weight:800;
+      font-size:26px;
+      font-weight:900;
+      margin-bottom:34px;
     }
 
-    .pro-title span{
-      color:#ff3d35;
+    .badge{
+      display:inline-block;
+      color:#ef2f2f;
+      border:1px solid #ef2f2f;
+      border-radius:6px;
+      padding:3px 7px;
+      font-size:12px;
+      margin-left:8px;
+      vertical-align:middle;
     }
 
     .pro-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:28px;
+      gap:24px;
     }
 
     .pro-card{
-      background:#11141d;
-      border-radius:28px;
-      padding:40px;
-      border:1px solid rgba(255,255,255,0.05);
+      background:#0c1219;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:16px;
+      padding:30px;
+      display:flex;
+      align-items:center;
+      gap:24px;
       position:relative;
-      overflow:hidden;
-    }
-
-    .pro-badge{
-      position:absolute;
-      top:24px;
-      right:24px;
-      background:#ff3d35;
-      padding:8px 14px;
-      border-radius:999px;
-      font-size:13px;
-      font-weight:700;
     }
 
     .pro-card h3{
-      font-size:34px;
-      margin-bottom:20px;
+      font-size:20px;
+      margin-bottom:8px;
     }
 
     .pro-card p{
-      color:#d0d0d0;
-      font-size:19px;
-      line-height:1.8;
+      color:#cfd5dc;
+      line-height:1.5;
+      font-size:14px;
+    }
+
+    .lock{
+      position:absolute;
+      right:26px;
+      top:28px;
+      opacity:.45;
     }
 
     .waitlist{
-      margin-top:120px;
-      background:linear-gradient(135deg,#8b0000,#ff3d35);
-      border-radius:38px;
-      padding:70px;
-    }
-
-    .waitlist-grid{
+      margin-top:52px;
+      background:
+        linear-gradient(90deg,rgba(160,0,0,.88),rgba(130,0,0,.62)),
+        url("asset/cta-bg.png") center/cover no-repeat;
+      border-radius:16px;
+      overflow:hidden;
+      padding:36px 44px;
       display:grid;
-      grid-template-columns:1fr auto;
-      gap:40px;
+      grid-template-columns:1fr 420px;
+      gap:38px;
       align-items:center;
     }
 
     .waitlist h2{
-      font-size:56px;
-      margin-bottom:16px;
+      font-size:30px;
+      line-height:1.25;
+      margin-bottom:12px;
     }
 
     .waitlist p{
-      font-size:21px;
-      line-height:1.7;
+      font-size:15px;
+      line-height:1.5;
     }
 
-    .waitlist-form{
+    .note{
+      font-size:13px;
+      opacity:.8;
+      margin-top:14px;
+    }
+
+    .form{
       display:flex;
-      gap:14px;
-      flex-wrap:wrap;
+      background:#fff;
+      padding:6px;
+      border-radius:999px;
+      height:58px;
     }
 
-    .waitlist-form input{
-      border:none;
-      padding:20px 24px;
-      border-radius:18px;
-      width:320px;
-      font-size:16px;
-      outline:none;
+    .form input{
+      flex:1;
+      border:0;
+      outline:0;
+      padding:0 22px;
+      font-size:15px;
+      background:transparent;
     }
 
-    .waitlist-form button{
-      border:none;
-      background:black;
-      color:white;
-      padding:20px 30px;
-      border-radius:18px;
-      font-weight:700;
+    .form button{
+      border:0;
+      background:#080c11;
+      color:#fff;
+      padding:0 26px;
+      border-radius:999px;
+      font-weight:800;
       cursor:pointer;
-      font-size:16px;
-    }
-
-    .waitlist-note{
-      margin-top:16px;
-      opacity:0.8;
-      font-size:14px;
     }
 
     footer{
-      padding:60px 0;
-      text-align:center;
-      color:#888;
-      font-size:15px;
+      padding:34px 0;
+      background:#05090d;
+      color:#8b949e;
     }
 
-    @media(max-width:1100px){
-      .hero-grid{
-        grid-template-columns:1fr;
-      }
-
-      .features{
-        grid-template-columns:1fr;
-      }
-
-      .steps{
-        grid-template-columns:1fr;
-      }
-
-      .pro-grid{
-        grid-template-columns:1fr;
-      }
-
-      .waitlist-grid{
-        grid-template-columns:1fr;
-      }
-
-      .nav-links{
-        display:none;
-      }
-
-      .hero-text h1{
-        font-size:62px;
-      }
+    .footer-grid{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:24px;
+      font-size:14px;
     }
 
-    @media(max-width:700px){
-      .hero{
-        padding-top:130px;
-      }
+    .footer-logo img{
+      height:34px;
+    }
 
-      .navbar{
-        padding:18px 0;
-      }
+    .footer-links{
+      display:flex;
+      gap:34px;
+    }
 
-      .logo img{
-        height:34px;
-      }
+    .social{
+      display:flex;
+      gap:14px;
+      color:#fff;
+    }
 
-      .hero-text h1{
-        font-size:46px;
-      }
+    .social span{
+      width:34px;
+      height:34px;
+      border-radius:50%;
+      background:#111820;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:14px;
+    }
 
-      .hero-text p{
-        font-size:20px;
-      }
+    @media(max-width:900px){
+      .nav-links{display:none}
+      .hero-content{grid-template-columns:1fr}
+      .phone{display:none}
+      .hero h1{font-size:46px}
+      .hero p{font-size:16px}
+      .hero-buttons{flex-direction:column;align-items:flex-start}
+      .features,.steps,.pro-grid,.waitlist{grid-template-columns:1fr}
+      .footer-grid{flex-direction:column;text-align:center}
+      .footer-links{flex-direction:column;gap:12px}
+    }
 
-      .section-title{
-        font-size:40px;
-      }
-
-      .pro-title{
-        font-size:40px;
-      }
-
-      .waitlist{
-        padding:40px 26px;
-      }
-
-      .waitlist h2{
-        font-size:38px;
-      }
-
-      .waitlist-form input,
-      .waitlist-form button{
+    @media(max-width:600px){
+      .container{width:90%}
+      .logo img{height:32px}
+      .hero{min-height:620px}
+      .hero h1{font-size:40px}
+      .waitlist{padding:30px 22px}
+      .form{height:auto;flex-direction:column;border-radius:16px;background:transparent;gap:12px}
+      .form input,.form button{
         width:100%;
+        height:52px;
+        border-radius:12px;
       }
+      .form input{background:#fff}
     }
   </style>
 </head>
@@ -507,27 +483,25 @@
 <body>
 
 <header>
-  <div class="container navbar">
+  <div class="container nav">
     <div class="logo">
-      <img src="asset/logo.png" alt="rAIderSoul Logo">
+      <img src="asset/logo.png" alt="rAIderSoul">
     </div>
 
-    <div class="nav-links">
+    <nav class="nav-links">
       <a href="#how">Come funziona</a>
       <a href="#features">Funzionalità</a>
       <a href="#pro">Per chi è</a>
       <a href="#">FAQ</a>
       <a href="#waitlist" class="nav-cta">Prova l’anteprima</a>
-    </div>
+    </nav>
   </div>
 </header>
 
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
+  <div class="container hero-content">
 
-  <div class="container hero-grid">
-    <div class="hero-text">
+    <div>
       <h1>
         La strada giusta,<br>
         prima la <span>scrivi.</span><br>
@@ -539,85 +513,85 @@
         Curve, buon asfalto, panorami, soste e apertura diretta su Google Maps.
       </p>
 
-      <div class="hero-actions">
-        <a href="#waitlist" class="btn-primary">Voglio provarla</a>
-        <a href="#how" class="btn-secondary">Scopri come funziona</a>
+      <div class="hero-buttons">
+        <a href="#waitlist" class="btn-primary">Voglio provarla →</a>
+        <a href="#how" class="btn-secondary">Scopri come funziona ↓</a>
       </div>
     </div>
 
     <div class="phone">
-      <div class="phone-screen">
-        <div class="phone-top">
-          <div class="phone-title">rAIderSoul</div>
-          <div>☰</div>
+      <div class="phone-inner">
+        <div class="phone-status">
+          <span>9:41</span>
+          <span>● ● ●</span>
         </div>
 
-        <div class="prompt-box">
-          “Parto da Napoli, ho 4 ore, voglio curve belle,
-          buon asfalto, zero autostrada e una sosta panoramica.”
+        <div class="phone-brand">r<span>AI</span>derSoul</div>
+
+        <div class="phone-label">Il tuo prompt</div>
+
+        <div class="prompt">
+          “Parto da Napoli, ho 4 ore, voglio curve belle, buon asfalto,
+          zero autostrada e una sosta panoramica.”
         </div>
 
-        <div class="route-card">
-          <h3>Giro consigliato</h3>
+        <div class="route-title">Giro consigliato</div>
 
-          <div class="route-item">
-            <span>🕓 Durata</span>
-            <span>4h circa</span>
-          </div>
-
-          <div class="route-item">
-            <span>🛣 Curve</span>
-            <span>Alte</span>
-          </div>
-
-          <div class="route-item">
-            <span>🏍 Asfalto</span>
-            <span>Buono</span>
-          </div>
-
-          <div class="route-item">
-            <span>☕ Soste</span>
-            <span>Caffè, pranzo, punto panoramico</span>
-          </div>
-
-          <a href="#" class="maps-btn">Apri su Google Maps</a>
+        <div class="route-box">
+          <div class="route-row"><span>Durata</span><span>4h circa</span></div>
+          <div class="route-row"><span>Curve</span><span>Alte</span></div>
+          <div class="route-row"><span>Asfalto</span><span>Buono</span></div>
+          <div class="route-row"><span>Soste</span><span>Caffè, pranzo tipico,<br>punto panoramico</span></div>
         </div>
+
+        <a class="maps-btn" href="#">Apri su Google Maps</a>
       </div>
     </div>
+
   </div>
 </section>
 
 <section id="features">
   <div class="container">
-    <h2 class="section-title">
-      Non è un navigatore.<br>
-      È il tuo compagno di viaggio.
-    </h2>
-
-    <p class="section-sub">
-      rAIderSoul non ti porta solo da A a B.
-      Ti aiuta a costruire un’esperienza:
-      più strada bella, meno tragitti noiosi,
-      più soste giuste.
+    <h2 class="section-title">Non è un navigatore. È il tuo compagno di viaggio.</h2>
+    <p class="section-subtitle">
+      rAIderSoul non ti porta solo da A a B. Ti aiuta a costruire un’esperienza:
+      più strada bella, meno tragitti noiosi, più soste giuste.
     </p>
 
     <div class="features">
       <div class="feature-card">
-        <div class="feature-icon">💬</div>
-        <h3>Giri da un prompt</h3>
-        <p>Scrivi cosa vuoi fare e l’AI genera un itinerario pensato per motociclisti.</p>
+        <svg class="icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3">
+          <path d="M12 16h40v28H25L14 54V44H12z"/>
+          <path d="M22 26h22M22 34h16"/>
+        </svg>
+        <div>
+          <h3>Giri da un prompt</h3>
+          <p>Scrivi cosa vuoi fare e l’AI genera un itinerario pensato per motociclisti.</p>
+        </div>
       </div>
 
       <div class="feature-card">
-        <div class="feature-icon">🛣</div>
-        <h3>Curve e buon asfalto</h3>
-        <p>Priorità a strade piacevoli, panoramiche e adatte alla guida in moto.</p>
+        <svg class="icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3">
+          <path d="M23 58c12-12-10-18 4-30 9-8 3-15-3-22"/>
+          <path d="M40 58c10-14-8-18 4-30 8-8 2-14-4-20"/>
+        </svg>
+        <div>
+          <h3>Curve e buon asfalto</h3>
+          <p>Priorità a strade piacevoli, panoramiche e adatte alla guida in moto.</p>
+        </div>
       </div>
 
       <div class="feature-card">
-        <div class="feature-icon">☕</div>
-        <h3>Soste intelligenti</h3>
-        <p>Caffè, pranzo, punti panoramici e POI lungo il percorso.</p>
+        <svg class="icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3">
+          <path d="M16 28h30v10a14 14 0 0 1-14 14h-2a14 14 0 0 1-14-14z"/>
+          <path d="M46 31h4a6 6 0 0 1 0 12h-4"/>
+          <path d="M24 18c0-4 4-4 4-8M34 18c0-4 4-4 4-8"/>
+        </svg>
+        <div>
+          <h3>Soste intelligenti</h3>
+          <p>Caffè, pranzo, punti panoramici e POI lungo il percorso.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -630,21 +604,33 @@
     <div class="steps">
       <div class="step">
         <div class="step-number">1</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 64 64" fill="none" stroke-width="3"><path d="M14 48l4-14 26-26 10 10-26 26z"/><path d="M38 14l10 10"/></svg>
+        </div>
         <p>Scrivi da dove parti, quanto tempo hai e che giro vuoi fare.</p>
       </div>
 
       <div class="step">
         <div class="step-number">2</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 64 64" fill="none" stroke-width="3"><path d="M18 18c0-6 5-10 10-10s10 4 10 10c0 8-10 18-10 18S18 26 18 18z"/><path d="M40 34c0-5 4-8 8-8s8 3 8 8c0 6-8 15-8 15S40 40 40 34z"/><path d="M28 44c8-5 13-4 20 5"/></svg>
+        </div>
         <p>rAIderSoul genera un itinerario con tappe e suggerimenti.</p>
       </div>
 
       <div class="step">
         <div class="step-number">3</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 64 64" fill="none" stroke-width="3"><path d="M12 14l14-6 14 6 12-6v42l-12 6-14-6-14 6z"/><path d="M26 8v42M40 14v42"/></svg>
+        </div>
         <p>Apri il percorso su Google Maps e parti.</p>
       </div>
 
       <div class="step">
         <div class="step-number">4</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 64 64" fill="none" stroke-width="3"><path d="M20 10h24v44L32 46 20 54z"/></svg>
+        </div>
         <p>Salva i tuoi giri preferiti nel profilo.</p>
       </div>
     </div>
@@ -653,43 +639,71 @@
 
 <section id="pro">
   <div class="container">
-    <h2 class="pro-title">
-      In arrivo nella versione <span>PRO</span>
-    </h2>
+    <h2 class="pro-title">In arrivo nella versione PRO <span class="badge">PRO</span></h2>
 
     <div class="pro-grid">
       <div class="pro-card">
-        <div class="pro-badge">PRO</div>
-        <h3>Weekend ride</h3>
-        <p>Itinerari ottimizzati per giri da 2, 4 o 6 ore. Presto disponibile.</p>
+        <svg class="icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3">
+          <path d="M6 52l16-28 12 18 8-12 16 22"/>
+          <path d="M22 24l8-12 8 18"/>
+        </svg>
+        <div>
+          <h3>Weekend ride <span class="badge">PRO</span></h3>
+          <p>Itinerari ottimizzati per giri da 2, 4 o 6 ore. Presto disponibile.</p>
+        </div>
+        <div class="lock">🔒</div>
       </div>
 
       <div class="pro-card">
-        <div class="pro-badge">PRO</div>
-        <h3>Viaggi lunghi</h3>
-        <p>Pianifica viaggi di più giorni con tappe, soste e strade imperdibili. Presto disponibile.</p>
+        <svg class="icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3">
+          <rect x="18" y="16" width="28" height="38" rx="4"/>
+          <path d="M26 16v-6h12v6M18 28h28M28 36h8"/>
+        </svg>
+        <div>
+          <h3>Viaggi lunghi <span class="badge">PRO</span></h3>
+          <p>Pianifica viaggi di più giorni con tappe, soste e strade imperdibili. Presto disponibile.</p>
+        </div>
+        <div class="lock">🔒</div>
       </div>
     </div>
 
     <div class="waitlist" id="waitlist">
-      <div class="waitlist-grid">
-        <div>
-          <h2>Vuoi provare rAIderSoul in anteprima?</h2>
-          <p>Lascia la tua email e unisciti ai primi motociclisti che testeranno l’app.</p>
-          <div class="waitlist-note">Niente spam. Solo novità importanti.</div>
-        </div>
-
-        <form class="waitlist-form">
-          <input type="email" placeholder="La tua email">
-          <button type="submit">Iscrivimi</button>
-        </form>
+      <div>
+        <h2>Vuoi provare rAIderSoul<br>in anteprima?</h2>
+        <p>Lascia la tua email e unisciti ai primi motociclisti che testeranno l’app.</p>
+        <div class="note">Niente spam. Solo novità importanti.</div>
       </div>
+
+      <form class="form">
+        <input type="email" placeholder="La tua email">
+        <button type="submit">Iscrivimi →</button>
+      </form>
     </div>
   </div>
 </section>
 
 <footer>
-  © 2026 rAIderSoul — P.IVA 06084820650
+  <div class="container footer-grid">
+    <div class="footer-logo">
+      <img src="asset/logo.png" alt="rAIderSoul">
+    </div>
+
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Termini di utilizzo</a>
+      <a href="#">Contatti</a>
+    </div>
+
+    <div class="social">
+      <span>ig</span>
+      <span>f</span>
+      <span>▶</span>
+    </div>
+  </div>
+
+  <div class="container" style="text-align:center;margin-top:26px;font-size:14px;color:#8b949e;">
+    © 2026 rAIderSoul — P.IVA 06084820650
+  </div>
 </footer>
 
 </body>
