@@ -233,6 +233,58 @@
       border-radius:999px;font-weight:800;cursor:pointer
     }
 
+    .waitlist-form-vertical{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.waitlist-form-vertical input,
+.waitlist-form-vertical select{
+  width:100%;
+  height:58px;
+  border:none;
+  outline:none;
+  border-radius:14px;
+  padding:0 18px;
+  font-size:15px;
+}
+
+.checkbox-group{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.checkbox-group label{
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.12);
+  padding:10px 14px;
+  border-radius:999px;
+  font-size:14px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.beta-check{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:14px;
+}
+
+.waitlist-form-vertical button{
+  height:58px;
+  border:none;
+  border-radius:14px;
+  background:#ff3131;
+  color:white;
+  font-weight:800;
+  font-size:16px;
+  cursor:pointer;
+}
+
     footer{
       padding:40px 0;
       border-top:1px solid rgba(255,255,255,.05)
@@ -497,21 +549,81 @@
         <div class="cta-note">Niente spam. Solo novità importanti.</div>
       </div>
 
-<form class="waitlist-form" 
-  action="https://formspree.io/f/xykvjklz" 
-  method="POST">
-  <input type="email" 
-    name="email" 
-    placeholder="La tua email" 
-    required>
+<form 
+  class="waitlist-form-vertical"
+  action="https://formspree.io/f/TUO_ID"
+  method="POST"
+>
 
-  <input type="hidden" 
-    name="progetto" 
-    value="rAIderSoul Waitlist">
+  <input 
+    type="text"
+    name="nome"
+    placeholder="Il tuo nome"
+    required
+  >
+
+  <input 
+    type="email"
+    name="email"
+    placeholder="La tua email"
+    required
+  >
+
+  <select name="tipo_motociclista" required>
+    <option value="">Che tipo di motociclista sei?</option>
+    <option>Giri brevi</option>
+    <option>Weekend ride</option>
+    <option>Touring / viaggi lunghi</option>
+    <option>Adventure / Enduro</option>
+    <option>Sportivo</option>
+    <option>Un po’ di tutto</option>
+  </select>
+
+  <input
+    type="text"
+    name="citta"
+    placeholder="Da dove parti di solito?"
+    required
+  >
+
+  <div class="checkbox-group">
+
+    <label>
+      <input type="checkbox" name="interessi[]" value="Curve belle">
+      Curve belle
+    </label>
+
+    <label>
+      <input type="checkbox" name="interessi[]" value="Buon asfalto">
+      Buon asfalto
+    </label>
+
+    <label>
+      <input type="checkbox" name="interessi[]" value="Panorami">
+      Panorami
+    </label>
+
+    <label>
+      <input type="checkbox" name="interessi[]" value="Soste food">
+      Soste food
+    </label>
+
+    <label>
+      <input type="checkbox" name="interessi[]" value="Strade poco conosciute">
+      Strade poco conosciute
+    </label>
+
+  </div>
+
+  <label class="beta-check">
+    <input type="checkbox" name="beta" value="si">
+    Voglio entrare nella beta privata
+  </label>
 
   <button type="submit">
-    Iscrivimi →
+    Unisciti alla waitlist →
   </button>
+
 </form>
     </div>
   </div>
