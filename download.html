@@ -1,15 +1,6 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-V9JJ1PJH62"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-V9JJ1PJH62');
-</script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Scarica rAIderSoul</title>
@@ -53,6 +44,18 @@
     .links a:hover{color:#fff;border-bottom-color:rgba(255,255,255,.4)}
     @media (max-width:640px){.card{padding:24px 18px}.badges img{height:58px}.icon{width:78px;height:78px;border-radius:20px}}
   </style>
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V9JJ1PJH62"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V9JJ1PJH62', {
+      send_page_view: true
+    });
+  </script>
+
 </head>
 <body>
   <main class="wrap">
@@ -67,10 +70,10 @@
       <p id="status" class="status">Sto rilevando il tuo dispositivo…</p>
       <div class="badges">
         <a id="iosLink" href="https://apps.apple.com/it/app/raidersoul/id6779222177" rel="noopener noreferrer">
-          <img src="./asset/app-store-badge.svg" alt="Download on the App Store" />
+          <img src="./assets/app-store-badge.svg" alt="Download on the App Store" />
         </a>
         <a id="androidLink" href="https://play.google.com/store/apps/details?id=com.franzrena.raidersoul" rel="noopener noreferrer">
-          <img src="./asset/google-play-badge.svg" alt="Get it on Google Play" />
+          <img src="./assets/google-play-badge.svg" alt="Get it on Google Play" />
         </a>
       </div>
       <p class="footer-note">Se il reindirizzamento automatico non parte, scegli manualmente il tuo store.</p>
@@ -84,24 +87,103 @@
     (() => {
       const IOS_URL = 'https://apps.apple.com/it/app/raidersoul/id6779222177';
       const ANDROID_URL = 'https://play.google.com/store/apps/details?id=com.franzrena.raidersoul';
-      const REDIRECT_DELAY_MS = 650;
+      const REDIRECT_DELAY_MS = 900;
+      const GA4_ID = 'G-V9JJ1PJH62';
+
       const params = new URLSearchParams(window.location.search);
-      const src = params.get('src') || params.get('utm_source') || '';
-      const campaign = params.get('campaign') || params.get('utm_campaign') || '';
-      const medium = params.get('utm_medium') || '';
-      if (src) sessionStorage.setItem('raidersoul_src', src);
-      if (campaign) sessionStorage.setItem('raidersoul_campaign', campaign);
-      if (medium) sessionStorage.setItem('raidersoul_medium', medium);
+      const source = params.get('utm_source') || params.get('src') || 'direct';
+      const medium = params.get('utm_medium') || 'direct';
+      const campaign = params.get('utm_campaign') || params.get('campaign') || 'none';
+      const content = params.get('utm_content') || '';
+
+      sessionStorage.setItem('raidersoul_source', source);
+      sessionStorage.setItem('raidersoul_medium', medium);
+      sessionStorage.setItem('raidersoul_campaign', campaign);
+      if (content) sessionStorage.setItem('raidersoul_content', content);
+
       const ua = navigator.userAgent || navigator.vendor || window.opera || '';
       const platform = navigator.platform || '';
       const maxTouchPoints = navigator.maxTouchPoints || 0;
+
       const isAndroid = /android/i.test(ua);
       const isIOS = /iPad|iPhone|iPod/i.test(ua) || (platform === 'MacIntel' && maxTouchPoints > 1);
+      const device = isIOS ? 'ios' : isAndroid ? 'android' : 'desktop_other';
+
       const status = document.getElementById('status');
-      function redirectTo(url, label){status.textContent = `Ti porto su ${label}…`; window.setTimeout(()=>window.location.replace(url), REDIRECT_DELAY_MS)}
-      if (isIOS) redirectTo(IOS_URL, 'App Store');
-      else if (isAndroid) redirectTo(ANDROID_URL, 'Google Play');
-      else status.textContent = 'Sei da desktop? Scegli lo store del tuo smartphone.';
+      const iosLink = document.getElementById('iosLink');
+      const androidLink = document.getElementById('androidLink');
+
+      function analyticsEnabled() {
+        return GA4_ID && typeof window.gtag === 'function';
+      }
+
+      function trackRedirect(store, method, callback) {
+        if (!analyticsEnabled()) {
+          callback();
+          return;
+        }
+
+        let done = false;
+        const finish = () => {
+          if (done) return;
+          done = true;
+          callback();
+        };
+
+        gtag('event', 'store_redirect', {
+          source: source,
+          medium: medium,
+          campaign: campaign,
+          content: content,
+          device_platform: device,
+          destination_store: store,
+          redirect_method: method,
+          event_callback: finish,
+          event_timeout: 800
+        });
+
+        window.setTimeout(finish, 900);
+      }
+
+      function goTo(url, label, store, method = 'automatic') {
+        status.textContent = `Ti porto su ${label}…`;
+        trackRedirect(store, method, () => {
+          window.location.replace(url);
+        });
+      }
+
+      function bindManual(link, url, label, store) {
+        link.addEventListener('click', (event) => {
+          if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+          event.preventDefault();
+          status.textContent = `Apro ${label}…`;
+          trackRedirect(store, 'manual', () => {
+            window.location.href = url;
+          });
+        });
+      }
+
+      bindManual(iosLink, IOS_URL, 'App Store', 'app_store');
+      bindManual(androidLink, ANDROID_URL, 'Google Play', 'google_play');
+
+      // Evento utile per capire quante visite raggiungono realmente la pagina di smistamento.
+      if (analyticsEnabled()) {
+        gtag('event', 'download_landing_view', {
+          source: source,
+          medium: medium,
+          campaign: campaign,
+          content: content,
+          device_platform: device
+        });
+      }
+
+      if (isIOS) {
+        window.setTimeout(() => goTo(IOS_URL, 'App Store', 'app_store'), REDIRECT_DELAY_MS);
+      } else if (isAndroid) {
+        window.setTimeout(() => goTo(ANDROID_URL, 'Google Play', 'google_play'), REDIRECT_DELAY_MS);
+      } else {
+        status.textContent = 'Sei da desktop? Scegli lo store del tuo smartphone.';
+      }
     })();
   </script>
 </body>
