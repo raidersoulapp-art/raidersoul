@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Scarica rAIderSoul</title>
+  <meta name="description" content="Scarica rAIderSoul su App Store o Google Play." />
+  <meta name="theme-color" content="#050505" />
+  <style>
+    :root{
+      --bg:#050505;
+      --panel:#101010;
+      --text:#f6f6f6;
+      --muted:#b6b6bb;
+      --line:rgba(255,255,255,.08);
+      --accent:#df1f28;
+      --accent2:#8f0f14;
+      --radius:28px;
+      --font:Aileron,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;font-family:var(--font);background:
+      radial-gradient(circle at top right, rgba(223,31,40,.16), transparent 28%),
+      radial-gradient(circle at left center, rgba(223,31,40,.10), transparent 22%),
+      linear-gradient(180deg,#090909 0%,#050505 100%);color:var(--text)}
+    body{display:grid;place-items:center;padding:20px}
+    .wrap{width:min(100%,640px)}
+    .card{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(18,18,18,.96),rgba(10,10,10,.96));border:1px solid var(--line);border-radius:var(--radius);padding:30px 22px;box-shadow:0 28px 90px rgba(0,0,0,.48)}
+    .card:before{content:"";position:absolute;inset:0;background:linear-gradient(145deg,rgba(255,255,255,.03),transparent 35%),linear-gradient(325deg,rgba(223,31,40,.08),transparent 34%);pointer-events:none}
+    .brand{position:relative;text-align:center}
+    .icon{width:88px;height:88px;border-radius:22px;display:block;margin:0 auto 14px;border:1px solid rgba(255,255,255,.1);box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .logo{display:block;max-width:min(100%,430px);margin:0 auto 6px;max-height:120px;object-fit:contain}
+    .eyebrow{display:inline-block;margin:12px auto 10px;padding:8px 12px;border-radius:999px;background:rgba(223,31,40,.12);border:1px solid rgba(223,31,40,.20);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#ffe1e4}
+    h1{margin:8px 0 10px;text-align:center;font-size:clamp(30px,7vw,48px);line-height:1;letter-spacing:-1.5px}
+    .payoff{margin:0 auto;max-width:470px;text-align:center;color:var(--muted);font-size:17px;line-height:1.55}
+    .status{margin:24px 0 8px;min-height:22px;text-align:center;color:#d8d8da;font-size:14px}
+    .badges{display:grid;gap:14px;justify-items:center;margin-top:18px}
+    .badges a{display:block;text-decoration:none;transition:transform .15s ease,opacity .15s ease}
+    .badges a:hover{transform:translateY(-2px);opacity:.98}
+    .badges img{display:block;height:64px;width:auto;max-width:min(100%,270px)}
+    .footer-note{margin-top:18px;text-align:center;color:#8d8d92;font-size:12px;line-height:1.5}
+    .links{display:flex;justify-content:center;flex-wrap:wrap;gap:18px;margin-top:14px}
+    .links a{color:#ddd;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.18)}
+    .links a:hover{color:#fff;border-bottom-color:rgba(255,255,255,.4)}
+    @media (max-width:640px){.card{padding:24px 18px}.badges img{height:58px}.icon{width:78px;height:78px;border-radius:20px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <div class="brand">
+        <img class="icon" src="./assets/raidersoul-app-icon.png" alt="Icona rAIderSoul" />
+        <img class="logo" src="./assets/raidersoul-logo.png" alt="Logo ufficiale rAIderSoul" />
+      </div>
+      <div style="text-align:center"><span class="eyebrow">Disponibile su iOS e Android</span></div>
+      <h1>Scarica rAIderSoul</h1>
+      <p class="payoff">La strada giusta, prima la scrivi. Poi la vivi.</p>
+      <p id="status" class="status">Sto rilevando il tuo dispositivo…</p>
+      <div class="badges">
+        <a id="iosLink" href="https://apps.apple.com/it/app/raidersoul/id6779222177" rel="noopener noreferrer">
+          <img src="./assets/app-store-badge.svg" alt="Download on the App Store" />
+        </a>
+        <a id="androidLink" href="https://play.google.com/store/apps/details?id=com.franzrena.raidersoul" rel="noopener noreferrer">
+          <img src="./assets/google-play-badge.svg" alt="Get it on Google Play" />
+        </a>
+      </div>
+      <p class="footer-note">Se il reindirizzamento automatico non parte, scegli manualmente il tuo store.</p>
+      <div class="links">
+        <a href="https://apps.apple.com/it/app/raidersoul/id6779222177" rel="noopener noreferrer">Apri App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=com.franzrena.raidersoul" rel="noopener noreferrer">Apri Google Play</a>
+      </div>
+    </section>
+  </main>
+  <script>
+    (() => {
+      const IOS_URL = 'https://apps.apple.com/it/app/raidersoul/id6779222177';
+      const ANDROID_URL = 'https://play.google.com/store/apps/details?id=com.franzrena.raidersoul';
+      const REDIRECT_DELAY_MS = 650;
+      const params = new URLSearchParams(window.location.search);
+      const src = params.get('src') || params.get('utm_source') || '';
+      const campaign = params.get('campaign') || params.get('utm_campaign') || '';
+      const medium = params.get('utm_medium') || '';
+      if (src) sessionStorage.setItem('raidersoul_src', src);
+      if (campaign) sessionStorage.setItem('raidersoul_campaign', campaign);
+      if (medium) sessionStorage.setItem('raidersoul_medium', medium);
+      const ua = navigator.userAgent || navigator.vendor || window.opera || '';
+      const platform = navigator.platform || '';
+      const maxTouchPoints = navigator.maxTouchPoints || 0;
+      const isAndroid = /android/i.test(ua);
+      const isIOS = /iPad|iPhone|iPod/i.test(ua) || (platform === 'MacIntel' && maxTouchPoints > 1);
+      const status = document.getElementById('status');
+      function redirectTo(url, label){status.textContent = `Ti porto su ${label}…`; window.setTimeout(()=>window.location.replace(url), REDIRECT_DELAY_MS)}
+      if (isIOS) redirectTo(IOS_URL, 'App Store');
+      else if (isAndroid) redirectTo(ANDROID_URL, 'Google Play');
+      else status.textContent = 'Sei da desktop? Scegli lo store del tuo smartphone.';
+    })();
+  </script>
+</body>
+</html>
