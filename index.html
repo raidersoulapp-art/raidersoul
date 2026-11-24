@@ -14,7 +14,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>rAIderSoul</title>
+  <title>rAIderSoul – App per creare itinerari in moto con l’AI</title>
+  <meta name="description" content="Crea itinerari in moto su iPhone e Android. Descrivi partenza, tempo, curve e soste, salva il giro e aprilo in Google Maps." />
+  <link rel="canonical" href="https://www.raidersoul.app/" />
 
   <style>
     * {
@@ -928,6 +930,10 @@ footer {
     line-height: 1.5;
   }
 }
+    .google-play-btn { margin-top: 0.75rem; }
+  #faq details { max-width: 48rem; margin: 0 auto; padding: 1rem 0; border-bottom: 1px solid #ffffff26; }
+  #faq summary { cursor: pointer; font-weight: 600; }
+  #faq details p { margin-top: 0.6rem; line-height: 1.6; }
   </style>
 </head>
   
@@ -943,8 +949,8 @@ footer {
       <a href="#how">Come funziona</a>
       <a href="#features">Funzionalità</a>
       <a href="#pro">Per chi è</a>
-      <a href="#">FAQ</a>
-      <a href="https://apps.apple.com/it/app/raidersoul/id6779222177" class="nav-cta" target="_blank" rel="noopener">Scarica l’app</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://www.raidersoul.app/download.html" class="nav-cta">Scarica l’app</a>
     </nav>
   </div>
 </header>
@@ -959,12 +965,11 @@ footer {
       </h1>
 
       <p>
-        r<span>AI</span>derSoul è l’app sviluppata da motociclisti per motociclisti che vogliono creare giri su misura partendo da un semplice prompt.
-        Curve, buon asfalto, panorami, soste e apertura diretta su Google Maps.
+        r<span>AI</span>derSoul è un’app per iPhone e Android che crea itinerari in moto con l’AI. Descrivi da dove parti, quanto tempo hai e che giro cerchi, tra curve, panorami e soste. Puoi salvare l’itinerario e aprirlo in Google Maps.
       </p>
 
       <div class="hero-buttons">
-        <a href="https://apps.apple.com/it/app/raidersoul/id6779222177" class="btn-primary" target="_blank" rel="noopener"> Scarica su App Store →</a>
+        <a href="https://www.raidersoul.app/download.html" class="btn-primary">Scarica per iPhone o Android →</a>
         <a href="#how" class="btn-secondary">Scopri come funziona ↓</a>
       </div>
     </div>
@@ -1137,8 +1142,8 @@ footer {
       <div class="cta-left">
         <img src="asset/logo.png" alt="rAIderSoul" class="cta-logo">
         <h2>La strada giusta,<br>prima la scrivi. Poi la vivi.</h2>
-        <p>rAIderSoul è disponibile su iPhone. Scarica l’app, descrivi il giro che vuoi fare e crea il tuo prossimo itinerario in pochi secondi.</p>
-        <div class="cta-note">Download gratuito su App Store.</div>
+        <p>rAIderSoul è disponibile su iPhone e Android. Scarica l’app, descrivi il giro che vuoi fare e crea il tuo prossimo itinerario in pochi secondi.</p>
+        <div class="cta-note">Download gratuito. Acquisti in app disponibili.</div>
       </div>
 
       <div class="app-download-card">
@@ -1149,8 +1154,29 @@ footer {
           <span class="apple-mark"></span>
           <span><small>Scarica su</small><strong>App Store</strong></span>
         </a>
+        <a href="https://play.google.com/store/apps/details?id=com.franzrena.raidersoul" class="app-store-btn google-play-btn" target="_blank" rel="noopener" aria-label="Scarica rAIderSoul su Google Play">
+          <span><small>Scarica su</small><strong>Google Play</strong></span>
+        </a>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="faq" class="section-padding">
+  <div class="container">
+    <h2 class="section-title">Domande frequenti</h2>
+    <details>
+      <summary>Come creo un giro in moto ad anello?</summary>
+      <p>Scegli il giro ad anello e descrivi la partenza, il tempo disponibile e le tue preferenze. Per esempio, puoi chiedere un giro di quattro ore da Napoli, con curve, senza autostrada e con una sosta panoramica.</p>
+    </details>
+    <details>
+      <summary>Come seguo l’itinerario mentre viaggio?</summary>
+      <p>rAIderSoul pianifica il giro e ti consente di aprirlo in Google Maps per la navigazione.</p>
+    </details>
+    <details>
+      <summary>Su quali telefoni posso usare rAIderSoul?</summary>
+      <p>L’app è disponibile su iPhone tramite App Store e su Android tramite Google Play.</p>
+    </details>
   </div>
 </section>
 
@@ -1178,5 +1204,15 @@ footer {
   </div>
 </footer>
 
+<script>
+  document.querySelectorAll('#download .app-store-btn').forEach((link) => {
+    link.addEventListener('click', () => {
+      gtag('event', 'store_redirect', {
+        destination_store: link.classList.contains('google-play-btn') ? 'google_play' : 'app_store',
+        redirect_method: 'homepage_store_link'
+      });
+    });
+  });
+</script>
 </body>
 </html>
